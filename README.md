@@ -20,27 +20,69 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
 2. **Abrir o Power Query Editor**: No editor de consulta, na guia "Exibir", marcar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na seção de visualização de dados.
 
-3. **Perfil de Coluna Completo**: Como o perfil por padrão será aberto apenas para 1000 linhas, selecionar "perfil de coluna com base no conjunto de dados inteiro".
-
 4. **Verificação de Erros**: Verificar a presença de erros ou valores vazios nas colunas relevantes.
    - Foi observado que a maioria das colunas não possui erros ou valores vazios, exceto a coluna "Arrival Delay".
 
 5. **Cálculo do Curva S**: Para calcular a curva S alguns formulas foram desenvolvidas:
 
-6. **Escolha do Tema**: No modo de relatório, sob a guia "Exibir", selecionar um tema apropriado para o dashboard.
+    
+    STATUS = 
+        
+        Table.AddColumn(Source, "Status", each if [percentComplete] = 0 then "Não Iniciada" else if [percentComplete] = 50 then "Em andamento" else if [percentComplete] = 100 then "Concluída" else null)
 
-7. **Representação das Avaliações**: Como os dados contêm várias avaliações, um novo visual foi adicionado usando as três elipses no painel de visualizações no modo de relatório.
 
-8. **Filtros Visuais (Slicers)**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
+     S Curve (EEM) - Total Complete Tasks Accumulated = 
+        
+         DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated];
+BLANK())
 
-9. **Visuais de Cartão**: Adicionar dois visuais de cartão ao canvas, um representando o atraso médio na partida em minutos e outro representando o atraso médio na chegada em minutos.
+     S Curve (EEM) - Total Planner Accumulated = 
+        
+        DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
+BLANK())  
+
+     S/A PLAN = 
+        
+       Table.AddColumn(#"Semana Real", "SA Plan", each Text.Combine({Text.From([Ano Plan], "pt-BR"), Text.From([Semana Plan], "pt-BR")}, "-"), type text)
+   
+     S/A REAL = 
+        
+        Table.AddColumn(#"SA Plan", "SA Real", each Text.Combine({Text.From([Ano Real], "pt-BR"), Text.From([Semana Real], "pt-BR")}, "-"), type text)
+   
+     TASKS ENCERRADAS = 
+        
+        Table.DuplicateColumn(#"Added Conditional Column1", "dueDateTime", "dueDateTime - Copy")   
+   
+     Calendar_suporte = 
+        
+        FILTER(
+    DISTINCT(
+        UNION(
+            SELECTCOLUMNS('Consolidado';"SA";'Consolidado'[SA Plan]);
+            SELECTCOLUMNS('Consolidado';"SA"; Consolidado[SA Real])
+        )
+    );
+[SA] <> BLANK()
+)
+
+7. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas:
+
+   <p align="center">
+   <img src= "QUERIES.jpeg">
+
+
+9. **Representação das Avaliações**: Como os dados contêm várias avaliações, um novo visual foi adicionado usando as três elipses no painel de visualizações no modo de relatório.
+
+10. **Filtros Visuais (Slicers)**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
+
+11. **Visuais de Cartão**: Adicionar dois visuais de cartão ao canvas, um representando o atraso médio na partida em minutos e outro representando o atraso médio na chegada em minutos.
    - Usar o filtro de nível visual no painel de filtros para excluir valores nulos na consideração do cálculo da média.
    - Por padrão, valores em branco são ignorados ao calcular a média.
 
-10. **Gráfico de Barras**: Adicionar um gráfico de barras à área de design do relatório representando o número de clientes satisfeitos e neutros/insatisfeitos.
+11. **Gráfico de Barras**: Adicionar um gráfico de barras à área de design do relatório representando o número de clientes satisfeitos e neutros/insatisfeitos.
     - Adicionar o campo "Gênero" ao bucket de Legendas, segregando assim o número de clientes por gênero.
 
-11. **Visual de Avaliações**: Representar diferentes avaliações como:
+12. **Visual de Avaliações**: Representar diferentes avaliações como:
     - Manuseio de bagagem
     - Serviços de check-in
     - Limpeza
@@ -55,11 +97,11 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
     Alguns parâmetros podem ser 0, representando que não se aplicam a certos clientes. Esses valores são ignorados ao calcular a média das avaliações.
 
-12. **Caixas de Texto**: No modo de relatório, sob a guia "Inserir", adicionar duas caixas de texto ao canvas, uma com o nome da empresa e outra com o slogan da empresa.
+13. **Caixas de Texto**: No modo de relatório, sob a guia "Inserir", adicionar duas caixas de texto ao canvas, uma com o nome da empresa e outra com o slogan da empresa.
 
-13. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
+14. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
 
-14. **Criação de Coluna Calculada**: Criar uma coluna calculada para agrupar clientes em várias faixas etárias usando a seguinte expressão DAX:
+15. **Criação de Coluna Calculada**: Criar uma coluna calculada para agrupar clientes em várias faixas etárias usando a seguinte expressão DAX:
 
 
 
