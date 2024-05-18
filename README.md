@@ -9,23 +9,30 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
 ### Passos Seguidos
 
-1. **Criação do Planner**: Levantamento das tarefas, criação de cronograma e definição de responsáveis:
+1. **Planejamento e Criação do Planner**:
+
+- Levantamento de Tarefas: Identificação e documentação de todas as tarefas necessárias para o processo de entrega.
+- Criação de Cronograma: Estabelecimento de um cronograma para a execução das tarefas, definindo prazos e responsáveis.
+- Definição de Responsáveis: Atribuição das tarefas aos membros da equipe no Microsoft Planner.
 
 <p align="center">
    <img src= "PLANNER OSU.jpeg">
    
-2. **Carregar dados no Power BI Desktop**: O dataset é obtido através da API criada no Microsoft Graph.
-   - Conectar o Power BI ao banco de dados do Planner utilizando o conector de API web.
+2. **Carregar dados no Power BI Desktop**: Integração com Power BI
+   
+- Obtenção dos Dados: Utilização da API do Microsoft Graph para extrair dados do Microsoft Planner.
+- Conexão com API Web: Configuração do Power BI para se conectar ao banco de dados do Planner utilizando o conector de API web.
+
 <p align="center">
    <img src= "API GRAPH.jpeg">
 
 
-3. **Abrir o Power Query Editor**: No editor de consulta, na guia "Exibir", marcar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na seção de visualização de dados.
+3. **Preparação dos Dados no Power BI Desktop**:
 
-4. **Verificação de Erros**: Verificar a presença de erros ou valores vazios nas colunas relevantes.
-   - Foi observado que a maioria das colunas não possui erros ou valores vazios, exceto a coluna "Arrival Delay".
+- Abrir Power Query Editor: No Power Query Editor, ativar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na guia "Exibir" para uma melhor visualização dos dados.
+- Verificação de Erros: Inspecionar as colunas para identificar e tratar erros ou valores vazios. Identificou-se que a coluna "Arrival Delay" apresentava valores inconsistentes.
 
-5. **Colunas Condicionais**: Para calcular a curva S alguns formulas foram desenvolvidas:
+4. **Colunas Condicionais**: Para calcular a curva S alguns formulas foram desenvolvidas:
 
     
     STATUS = 
@@ -57,51 +64,53 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 [SA] <> BLANK()
 )
 
-6. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
+5. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
 
    <p align="center">
    <img height="240" right="130" src= "QUERIES.jpeg">  <img height="240" right="130" src= "VIEW MODELO.jpeg">
 
 
-7. **Curva S**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
+6. **Curva S**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
 
 
-     S Curve (EEM) - sum cumulative complete tasksd = 
+     Cálculo de Tarefas Concluídas e Planejadas Acumuladas = 
         
          CALCULATE([Total acumulado de SA Real]; FILTER(ALL('Calendar_suporte'[SA]); 'Calendar_suporte'[SA]<=MAX('Calendar_suporte'[SA])))
+         CALCULATE([Soma de quantidade por SA Plam]; FILTER(ALL('Calendar_suporte'[SA]); 'Calendar_suporte'[SA]<=MAX('Calendar_suporte'[SA])))
 
-     S Curve (EEM) - sum cumulative planned tasks = 
-        
-         CALCULATE([Soma de quantidade por SA Plam]; FILTER(ALL('Calendar_suporte'[SA]); 'Calendar_suporte'[SA]<=MAX('Calendar_suporte'[SA]))) 
 
-     S Curve (EEM) - Total Complete Tasks Accumulated = 
+     Cálculo das Proporções Acumuladas = 
         
          DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated];
 BLANK())
+         DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
+BLANK())
 
-     S Curve (EEM) - Total Planner Accumulated = 
-        
-        DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
-BLANK()) 
 
 Resultado final:
 
    <p align="center">
    <img src= "CURVA S.jpeg">
 
-8. **Visuais Gerais**: Foram criados os visuais de tasks realizadas, atrasadas e planejadas, além do ranking de execução e tasks atrasadas:
+7. **Visuais Gerais**: Foram criados os visuais de tasks realizadas, atrasadas e planejadas, além do ranking de execução e tasks atrasadas:
 
    <p align="center">
    <img src= "IND GERAIS.jpeg">
 
-9. **CRONOGRAMA**: Esse foi um gráfico criado para acompanhamentos das tasks em andamento no dia atual (Today), porém serve para vizualizar as proximas ações bem como as que já foram executadas:
+8. **CRONOGRAMA**: Esse foi um gráfico criado para acompanhamentos das tasks em andamento no dia atual (Today), porém serve para vizualizar as proximas ações bem como as que já foram executadas:
 
    <p align="center">
    <img src= "CRONOGRAMA.jpeg">
 
-10. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
+09. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
 
    <p align="center">
    <img src= "FOLLOW UP.jpeg">
 
-11. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
+10. **Customização do Relatório**:
+
+Inserção de Imagens e Formas: Adição de elementos gráficos, como retângulos e logotipo da empresa, para melhorar o design do relatório.
+
+## Resultado Final
+
+O dashboard criado fornece uma visão abrangente das operações de entrega, permitindo um acompanhamento eficiente das tarefas e facilitando a tomada de decisões estratégicas. Com a integração do Microsoft Planner ao Power BI, a empresa consegue monitorar o progresso das entregas e a performance da equipe em tempo real, promovendo uma gestão mais eficaz e proativa.
