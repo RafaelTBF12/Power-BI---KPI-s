@@ -12,8 +12,8 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
 1. **Carregar dados no Power BI Desktop**: O dataset é obtido através da API criada no Microsoft Graph.
    - Conectar o Power BI ao banco de dados do Planner utilizando o conector de API web.
-[![Snap_1](https://user-images.githubusercontent.com/102996550/174089602-ab834a6b-62ce-4b62-8922-a1d241ec240e.jpg)
-]
+![Snap_1](API GRAPH.jpeg)
+
 2. **Abrir o Power Query Editor**: No editor de consulta, na guia "Exibir", marcar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na seção de visualização de dados.
 
 3. **Perfil de Coluna Completo**: Como o perfil por padrão será aberto apenas para 1000 linhas, selecionar "perfil de coluna com base no conjunto de dados inteiro".
