@@ -1,7 +1,7 @@
 
 # Integração do Microsoft Planner no Power BI para Acompanhamento de Entregas
 
-## Problem Statement
+## Entendimento do Problema
 
 ### Dashboard para Acompanhamento de Entregas Integrado com Microsoft Planner
 
@@ -102,6 +102,6 @@ Resultado final:
 10. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
 
    <p align="center">
-   <img height="220" right="120" src= "FOLLOW UP.jpeg">
+   <img height="220" right="120" src= "PLANNER OSU.jpeg">
 
 11. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
