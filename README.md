@@ -1,9 +1,6 @@
 
 # Integração do Microsoft Planner no Power BI para Acompanhamento de Entregas
 
-<p align="center">
-   <img src= "VISUALIZAÇÃO DO PROJETO.jpeg">
-
 ## Problem Statement
 
 ### Dashboard para Acompanhamento de Entregas Integrado com Microsoft Planner
@@ -23,23 +20,13 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 4. **Verificação de Erros**: Verificar a presença de erros ou valores vazios nas colunas relevantes.
    - Foi observado que a maioria das colunas não possui erros ou valores vazios, exceto a coluna "Arrival Delay".
 
-5. **Cálculo do Curva S**: Para calcular a curva S alguns formulas foram desenvolvidas:
+5. **Colunas Condicionais**: Para calcular a curva S alguns formulas foram desenvolvidas:
 
     
     STATUS = 
         
         Table.AddColumn(Source, "Status", each if [percentComplete] = 0 then "Não Iniciada" else if [percentComplete] = 50 then "Em andamento" else if [percentComplete] = 100 then "Concluída" else null)
 
-
-     S Curve (EEM) - Total Complete Tasks Accumulated = 
-        
-         DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated];
-BLANK())
-
-     S Curve (EEM) - Total Planner Accumulated = 
-        
-        DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
-BLANK())  
 
      S/A PLAN = 
         
@@ -65,15 +52,37 @@ BLANK())
 [SA] <> BLANK()
 )
 
-7. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas:
+7. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
 
    <p align="center">
-   <img src= "QUERIES.jpeg">
+   <img height="240" right="130" src= "QUERIES.jpeg">  <img height="240" right="130" src= "VIEW MODELO.jpeg">
 
 
-9. **Representação das Avaliações**: Como os dados contêm várias avaliações, um novo visual foi adicionado usando as três elipses no painel de visualizações no modo de relatório.
+10. **Curva S**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
 
-10. **Filtros Visuais (Slicers)**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
+
+     S Curve (EEM) - sum cumulative complete tasksd = 
+        
+         CALCULATE([Total acumulado de SA Real]; FILTER(ALL('Calendar_suporte'[SA]); 'Calendar_suporte'[SA]<=MAX('Calendar_suporte'[SA])))
+
+     S Curve (EEM) - sum cumulative planned tasks = 
+        
+         CALCULATE([Soma de quantidade por SA Plam]; FILTER(ALL('Calendar_suporte'[SA]); 'Calendar_suporte'[SA]<=MAX('Calendar_suporte'[SA]))) 
+
+     S Curve (EEM) - Total Complete Tasks Accumulated = 
+        
+         DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated];
+BLANK())
+
+     S Curve (EEM) - Total Planner Accumulated = 
+        
+        DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
+BLANK()) 
+
+Resultado final:
+
+   <p align="center">
+   <img height="320" right="180" src= "QUERIES.jpeg">  <img height="320" right="180" src= "VIEW MODELO.jpeg">
 
 11. **Visuais de Cartão**: Adicionar dois visuais de cartão ao canvas, um representando o atraso médio na partida em minutos e outro representando o atraso médio na chegada em minutos.
    - Usar o filtro de nível visual no painel de filtros para excluir valores nulos na consideração do cálculo da média.
