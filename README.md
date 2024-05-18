@@ -54,15 +54,7 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
    
      Calendar_suporte = 
         
-        FILTER(
-    DISTINCT(
-        UNION(
-            SELECTCOLUMNS('Consolidado';"SA";'Consolidado'[SA Plan]);
-            SELECTCOLUMNS('Consolidado';"SA"; Consolidado[SA Real])
-        )
-    );
-[SA] <> BLANK()
-)
+        FILTER(DISTINCT(UNION(SELECTCOLUMNS('Consolidado';"SA";'Consolidado'[SA Plan]); SELECTCOLUMNS('Consolidado';"SA"; Consolidado[SA Real])));[SA] <> BLANK())
 
 5. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
 
@@ -81,10 +73,8 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
      Cálculo das Proporções Acumuladas = 
         
-         DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated];
-BLANK())
-         DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated];
-BLANK())
+         DIVIDE('consolidado'[S Curve (EEM) - sum cumulative complete tasks]; 'Consolidado'[S Curve - sum of all planner tasks accumulated]; BLANK())
+         DIVIDE('Consolidado'[S Curve (EEM) - sum cumulative planned tasks]; 'Consolidado'[S Curve (EEM) - sum of all planned tasks accumulated]; BLANK())
 
 
 Resultado final:
