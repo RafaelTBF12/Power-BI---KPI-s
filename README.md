@@ -102,6 +102,6 @@ Resultado final:
 10. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
 
    <p align="center">
-   <img src= "PLANNER OSU.jpeg">
+   <img src= "FOLLOW UP.jpeg">
 
 11. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
