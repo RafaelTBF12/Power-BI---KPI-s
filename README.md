@@ -2,7 +2,7 @@
 # Integração do Microsoft Planner no Power BI para Acompanhamento de Entregas
 
 <p align="center">
-   <img src= "VIZUALIZAÇÃO DO PROJETO.jpeg">
+   <img src= "VISUALIZAÇÃO DO PROJETO.jpeg">
 
 ## Problem Statement
 
