@@ -87,21 +87,21 @@ BLANK())
 Resultado final:
 
    <p align="center">
-   <img height="220" right="120" src= "CURVA S.jpeg">
+   <img src= "CURVA S.jpeg">
 
 8. **Visuais Gerais**: Foram criados os visuais de tasks realizadas, atrasadas e planejadas, além do ranking de execução e tasks atrasadas:
 
    <p align="center">
-   <img height="220" right="120" src= "IND GERAIS.jpeg">
+   <img src= "IND GERAIS.jpeg">
 
 9. **CRONOGRAMA**: Esse foi um gráfico criado para acompanhamentos das tasks em andamento no dia atual (Today), porém serve para vizualizar as proximas ações bem como as que já foram executadas:
 
    <p align="center">
-   <img height="220" right="120" src= "CRONOGRAMA.jpeg">
+   <img src= "CRONOGRAMA.jpeg">
 
 10. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
 
    <p align="center">
-   <img height="220" right="120" src= "PLANNER OSU.jpeg">
+   <img src= "PLANNER OSU.jpeg">
 
 11. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
