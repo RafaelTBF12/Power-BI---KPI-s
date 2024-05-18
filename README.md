@@ -9,13 +9,18 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 
 ### Passos Seguidos
 
-1. **Carregar dados no Power BI Desktop**: O dataset é obtido através da API criada no Microsoft Graph.
+1. **Criação do Planner**: Levantamento das tarefas, criação de cronograma e definição de responsáveis:
+
+<p align="center">
+   <img src= "PLANNER OSU.jpeg">
+   
+2. **Carregar dados no Power BI Desktop**: O dataset é obtido através da API criada no Microsoft Graph.
    - Conectar o Power BI ao banco de dados do Planner utilizando o conector de API web.
 <p align="center">
    <img src= "API GRAPH.jpeg">
-![Snap_1](API GRAPH.jpeg)
 
-2. **Abrir o Power Query Editor**: No editor de consulta, na guia "Exibir", marcar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na seção de visualização de dados.
+
+3. **Abrir o Power Query Editor**: No editor de consulta, na guia "Exibir", marcar as opções "distribuição de coluna", "qualidade da coluna" e "perfil da coluna" na seção de visualização de dados.
 
 4. **Verificação de Erros**: Verificar a presença de erros ou valores vazios nas colunas relevantes.
    - Foi observado que a maioria das colunas não possui erros ou valores vazios, exceto a coluna "Arrival Delay".
@@ -52,13 +57,13 @@ Este dashboard ajuda a empresa a entender melhor as suas operações de entregas
 [SA] <> BLANK()
 )
 
-7. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
+6. **Correlação de Queries**: As Queries foram integradas para atender as necessidades supracitadas, dessa forma posibilitamos a criação de visual que relacionacem as atividades aos usuários, data, bucktes do planner, áreas das atividades e ao status dela:
 
    <p align="center">
    <img height="240" right="130" src= "QUERIES.jpeg">  <img height="240" right="130" src= "VIEW MODELO.jpeg">
 
 
-10. **Curva S**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
+7. **Curva S**: Adicionar filtros visuais para campos relevantes, como "Região de Entrega", "Tipo de Produto", "Tipo de Cliente" e "Método de Entrega".
 
 
      S Curve (EEM) - sum cumulative complete tasksd = 
@@ -84,19 +89,19 @@ Resultado final:
    <p align="center">
    <img height="220" right="120" src= "CURVA S.jpeg">
 
-11. **Visuais Gerais**: Foram criados os visuais de tasks realizadas, atrasadas e planejadas, além do ranking de execução e tasks atrasadas:
+8. **Visuais Gerais**: Foram criados os visuais de tasks realizadas, atrasadas e planejadas, além do ranking de execução e tasks atrasadas:
 
    <p align="center">
    <img height="220" right="120" src= "IND GERAIS.jpeg">
 
-11. **CRONOGRAMA**: Esse foi um gráfico criado para acompanhamentos das tasks em andamento no dia atual (Today), porém serve para vizualizar as proximas ações bem como as que já foram executadas:
+9. **CRONOGRAMA**: Esse foi um gráfico criado para acompanhamentos das tasks em andamento no dia atual (Today), porém serve para vizualizar as proximas ações bem como as que já foram executadas:
 
    <p align="center">
    <img height="220" right="120" src= "CRONOGRAMA.jpeg">
 
-11. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
+10. **FOLLOW UP**: Por fim um follow up do planner facilita a contextualização do arquivo
 
    <p align="center">
    <img height="220" right="120" src= "FOLLOW UP.jpeg">
 
-15. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
+11. **Inserção de Imagens e Formas**: Inserir um retângulo usando a opção de formas do grupo de elementos e adicionar o logotipo da empresa ao design do relatório.
